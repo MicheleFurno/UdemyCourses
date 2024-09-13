@@ -15,7 +15,10 @@
                     <a routerLink="/messages" class="nav-link" routerLinkActive="active">Messages</a>
                 </li>
             }
-        </ul>
+            <li class="nav-item">
+                <a routerLink="/errors" class="nav-link" routerLinkActive="active">Errors</a>
+            </li>
+    </ul>
 
       @if (accountService.currentUser()) {
         <div dropdown class="dropdown">
