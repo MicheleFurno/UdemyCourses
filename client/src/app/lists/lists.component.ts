@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { LikesService } from '../_services/likes.service';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule } from '@angular/forms';
@@ -12,14 +12,18 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
   templateUrl: './lists.component.html',
   styleUrl: './lists.component.css'
 })
-export class ListsComponent implements OnInit {
+export class ListsComponent implements OnInit, OnDestroy {
   likeService = inject(LikesService);
   predicate = 'likes';
   pageNumber = 1;
   pageSize = 5;
 
   ngOnInit(): void {
-    this.loadLikes()
+    this.loadLikes();
+  }
+
+  ngOnDestroy(): void {
+    this.likeService.paginatedResult.set(null);
   }
 
   getTitle() {
