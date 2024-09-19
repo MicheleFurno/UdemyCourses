@@ -26,7 +26,8 @@ public class AutoMapperProfiles : Profile
             .ForMember(destination => destination.SenderUserName, 
                                       option => option.MapFrom(source => source.Sender.UserName))
             .ForMember(destination => destination.RecipientUserName, 
-                                      option => option.MapFrom(source => source.Recipient.UserName))
-        ;
+                                      option => option.MapFrom(source => source.Recipient.UserName));
+        CreateMap<DateTime, DateTime>().ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
+        CreateMap<DateTime?, DateTime?>().ConvertUsing(d => d.HasValue ? DateTime.SpecifyKind(d.Value, DateTimeKind.Utc) : null);
     }
 }
